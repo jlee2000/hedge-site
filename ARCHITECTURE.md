@@ -58,7 +58,7 @@ State before the change, read with `dig` on 2026-11-03 at 11:20 ET:
 | `TXT` | `_dmarc` | `v=DMARC1; p=none;` | DMARC for the mail; not touched |
 | `AAAA` | `@` | none | |
 
-The edit J makes in Squarespace's DNS settings for the domain, and nothing else:
+The edit J made in Squarespace's DNS settings on 2026-11-03 between 11:50 and 11:53 ET, and nothing else:
 
 1. Remove the two preset web-host records: the four `A` records on `@` listed above and the `www` `CNAME` to
    `ext-sq.squarespace.com`. Squarespace shows them under "Squarespace Defaults". If the panel only offers to delete
@@ -84,7 +84,10 @@ The edit J makes in Squarespace's DNS settings for the domain, and nothing else:
    or any `google-site-verification` `TXT`.
 
 Values verified against GitHub's "Managing a custom domain for your GitHub Pages site" page on 2026-11-03. Check
-with `dig +short hedgequantresearch.com A` and `dig +short www.hedgequantresearch.com CNAME`.
+with `dig +short hedgequantresearch.com A` and `dig +short www.hedgequantresearch.com CNAME`. State after the edit,
+read at the authoritative nameservers `nsb1` and `nsb2` at 11:53: the four GitHub `A` records, `www` to
+`jlee2000.github.io`, no `AAAA`, and the `MX`, SPF, DKIM and DMARC records unchanged. Record TTL is 14400 seconds, so
+a resolver that cached the parking records before the edit can keep returning them for up to four hours.
 
 On the GitHub side, the custom domain is set on the Pages settings
 (`gh api -X PUT /repos/jlee2000/hedge-site/pages -f cname=hedgequantresearch.com`), which also writes the `CNAME`
@@ -124,4 +127,10 @@ newsletter capture, no social icons beyond the one LinkedIn text link, no images
 
 ## Change log
 
-- 2026-11-03: repository created; v0 page, thanks page, stylesheet; Pages enabled on `main` at `/`.
+- 2026-11-03 11:31 ET: repository created; v0 page, thanks page, stylesheet; Pages enabled on `main` at `/`
+  (`a06e30c`, `53bca42`).
+- 2026-11-03 11:41: copy revision from the copy file: "Massachusetts" without the town in the subtitle, footer and
+  description; thank-you line (`b584064`).
+- 2026-11-03 11:53: `CNAME` file; form redirect, canonical and `og:url` moved to the custom domain (`8050238`);
+  custom domain set on Pages; certificate approved for the apex and `www` at 11:53 (expires 2027-02-01);
+  `https_enforced` switched on at 11:54.
