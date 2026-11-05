@@ -11,7 +11,7 @@ order "hedgequantresearch.com v0".
 
 | File | Role |
 | --- | --- |
-| `index.html` | The page. Every word of visible text comes from the copy file `SITE_COPY_v0.md` kept outside this repository; this repository does not edit copy. |
+| `index.html` | The page. Every word of visible text comes from the copy file `SITE_COPY_v0.md` kept outside this repository, except the "Writing" line in the Public section, which comes from the work order of 2026-11-04; this repository does not edit copy. |
 | `thanks.html` | The one-line page the contact form redirects to after a successful submission. `noindex`. |
 | `style.css` | The only stylesheet, shared by every page. System serif stack (Georgia), one accent colour for links and the button, hairline rules. The data page's rules (headings, file list, posting-dates table) sit in their own block and use selectors the home page does not carry, so the home page renders unchanged. |
 | `data/index.html` | The data and methods page at `/data/`. Its text comes from the work order of 2026-11-04 and the public reports it names, not from the copy file. |
@@ -25,7 +25,9 @@ order "hedgequantresearch.com v0".
 | `ARCHITECTURE.md` | This file. |
 
 Relative links only (`style.css`; `../style.css` and `../` from the data page), so the pages work both at
-`https://jlee2000.github.io/hedge-site/` and at the apex domain.
+`https://jlee2000.github.io/hedge-site/` and at the apex domain. One exception: the home page's Writing line links
+`/data/`, root-relative, as the work order wrote it; it resolves on the apex domain, and the github.io URL redirects
+there.
 
 ## How the page deploys
 
@@ -164,8 +166,10 @@ python3 -c "from PIL import Image; Image.open('_review/round-N/mobile.tmp.png').
 
 ## Deliberately absent
 
-No copy beyond the copy file, no services menu, no team page, no testimonials, no client names, no blog, no pricing,
-no visible email address (the form is the contact mechanism; no `mailto:`), no analytics, no cookie notice, no
+No copy beyond the copy file (the Writing line and the data page excepted, as above), no services menu, no team page,
+no testimonials, no client names, no blog (the Writing line points to posts published elsewhere), no pricing, no
+visible email address on the home page (the form is the contact mechanism; no `mailto:` anywhere; the data page's
+corrections line carries the firm's address as plain text, as the work order of 2026-11-04 wrote it), no analytics, no cookie notice, no
 newsletter capture, no social icons beyond the one LinkedIn text link, no images, no icons, no favicon (the
 `data:` icon link only stops the browser requesting one), no JavaScript, no framework, no CI.
 
@@ -180,4 +184,7 @@ newsletter capture, no social icons beyond the one LinkedIn text link, no images
   `https_enforced` switched on at 11:54.
 - 2026-11-04 19:40 ET: `data/` (the explainer's table, the posting-date record, the read-me and the methods page) and
   the stylesheet's data-page block; README line (commit "data: the explainer's table, posting-date record and methods
-  note under /data/"). Not pushed: J reviews the rendered pages first.
+  note under /data/", `df93b3e`). Not pushed: J reviews the rendered pages first.
+- 2026-11-04 19:45: home page Writing line in the Public section, after the CFTC link, with the `/data/` link only
+  (no Substack URL yet; J adds the post's link in a one-line commit when it exists) (commit "home: Writing line with
+  the /data/ link"). Not pushed.
