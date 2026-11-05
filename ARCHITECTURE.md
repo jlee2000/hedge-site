@@ -13,15 +13,19 @@ order "hedgequantresearch.com v0".
 | --- | --- |
 | `index.html` | The page. Every word of visible text comes from the copy file `SITE_COPY_v0.md` kept outside this repository; this repository does not edit copy. |
 | `thanks.html` | The one-line page the contact form redirects to after a successful submission. `noindex`. |
-| `style.css` | The only stylesheet, shared by both pages. System serif stack (Georgia), one accent colour for links and the button, hairline rules. |
+| `style.css` | The only stylesheet, shared by every page. System serif stack (Georgia), one accent colour for links and the button, hairline rules. The data page's rules (headings, file list, posting-dates table) sit in their own block and use selectors the home page does not carry, so the home page renders unchanged. |
+| `data/index.html` | The data and methods page at `/data/`. Its text comes from the work order of 2026-11-04 and the public reports it names, not from the copy file. |
+| `data/ma_mlr_four_payers_2014_2023.csv` | The table behind the explainer's chart (40 rows). See "data/" below. |
+| `data/README_ma_mlr_four_payers.txt` | Plain-text read-me for the table: method, columns, CMS sources with sha256, exclusions, attribution rule, license. |
+| `data/puf_release_dates.csv` | When CMS posted each of its ten MLR public use files (10 rows). |
 | `CNAME` | The custom domain for GitHub Pages (`hedgequantresearch.com`). Added when the custom domain was switched on. |
 | `.nojekyll` | Tells GitHub Pages to serve the files as they are, without the Jekyll build. |
 | `.gitignore` | Ignores `_review/` (screenshots and critiques from the self-review loop) and `.DS_Store`. |
 | `README.md` | Two lines. |
 | `ARCHITECTURE.md` | This file. |
 
-Relative links only (`style.css`), so the page works both at `https://jlee2000.github.io/hedge-site/` and at the apex
-domain.
+Relative links only (`style.css`; `../style.css` and `../` from the data page), so the pages work both at
+`https://jlee2000.github.io/hedge-site/` and at the apex domain.
 
 ## How the page deploys
 
@@ -96,11 +100,51 @@ domain on Pages in between; the setting is harmless while DNS still points elsew
 provisions a Let's Encrypt certificate, and `https_enforced` is switched on once the certificate state reads
 `approved`.
 
+## data/
+
+The data and methods bundle the explainer "How to use the CMS Medicare Advantage MLR public use files" cites (Substack,
+for 2026-11-12). Added 2026-11-04 under the work order of that day. Three data files and one page:
+
+- `ma_mlr_four_payers_2014_2023.csv`: the Medicare Advantage MLR of UnitedHealth Group, Humana, CVS Health (Aetna) and
+  Elevance Health (Anthem), 2014 to 2023, one row per payer and year. A reformatted copy of the parent-year table of the
+  public-data build in the firm's private research repository, which reads CMS's public files only. The copy drops
+  the two deprecated thin-year sensitivity columns (suppressed county cells imputed at 5), spells the payers out, and
+  renames six columns for a public reader (the numerator and denominator, CMS's published-basis sums and ratio, and
+  claims over gross revenue); every other column keeps its name. Ratios to six decimals, dollars to the cent, counts
+  as integers, UTF-8, LF, header row; rows ordered by payer, then year.
+- `README_ma_mlr_four_payers.txt`: wraps at 100 except the eight CMS URLs too long for a line. Its URLs and sha256
+  values were copied by script from the build's lineage record, not retyped. The method paragraphs are the chart's
+  own wording and the build's contract-weights methods paragraph.
+- `puf_release_dates.csv`: the build's posting-date record of the ten MLR files, without its internal match column
+  and with two notes reworded to drop references to the build's own folders.
+- `index.html`: the methods note (files, the table and the chart, posting dates, sensitivities, corrections line). Its
+  posting-dates table is generated from `puf_release_dates.csv`; on screens under 40rem each range breaks before
+  "to", and the table sits in a horizontally scrolling wrapper as a backstop.
+
+Every number on the page and in the read-me comes from the build's published reports of 2026-11-03 and 2026-11-04,
+not from memory.
+
+**Scrub list.** Before each commit, every file under `data/` and every line added elsewhere is searched for the
+client's name in either case, the capitalised client and licensing markers, the names of the two private
+repositories, the private repository's folder, work-order and hand-off labels, the former town, the statutory dataset
+and its vendor (the bundle names no dataset other than CMS's files), the old SEC user-agent string, and the em-dash and
+en-dash characters. Every count must be zero. Internal commit SHAs, file paths and tool names do not appear. The
+client, if it must be referred to at all, is "a national value-based care company"; the bundle does not refer to it.
+
+**No code.** Nothing executable is published: `data/` holds the three data files and the page. The conversions above
+ran as one-off scripts outside both repositories.
+
+**License.** "Data: CC BY 4.0, Hedge Quantitative Research LLC. Underlying CMS files are United States government
+works." on the page and in the read-me (the work order's default; J may overrule before pushing).
+
 ## Review loop
 
 Each round renders screenshots with the installed Google Chrome in headless mode against the local files, then a
 written critique against the design brief, then fixes. Screenshots and critiques live under `_review/round-N/`
-(ignored by git). The final round's `desktop.png` (1280x800) and `mobile.png` (390x844) are what J reviewed.
+(ignored by git). The final round's `desktop.png` (1280x800) and `mobile.png` (390x844) are what J reviewed. Round 4 (2026-11-04)
+renders the data page as `data-desktop.png`, `data-desktop-full.png`, `data-mobile.png` and `data-mobile-full.png`
+(frames `_review/frame-data-mobile.html` and `_review/frame-data-mobile-full.html`, iframe heights 844 and 6000; full
+captures trimmed to the content), and the home page as `desktop.png` and `mobile.png`.
 
 Headless Chrome (156 on macOS) clamps `--window-size` widths below 500 to 500, so the phone render goes through a
 wrapper page holding a 390 px wide `iframe`, and the capture is cropped to the frame:
@@ -134,3 +178,6 @@ newsletter capture, no social icons beyond the one LinkedIn text link, no images
 - 2026-11-03 11:53: `CNAME` file; form redirect, canonical and `og:url` moved to the custom domain (`8050238`);
   custom domain set on Pages; certificate approved for the apex and `www` at 11:53 (expires 2027-02-01);
   `https_enforced` switched on at 11:54.
+- 2026-11-04 19:40 ET: `data/` (the explainer's table, the posting-date record, the read-me and the methods page) and
+  the stylesheet's data-page block; README line (commit "data: the explainer's table, posting-date record and methods
+  note under /data/"). Not pushed: J reviews the rendered pages first.

@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Data and methods: CMS Medicare Advantage MLR, four payers, 2014 to 2023</title>
+<meta name="description" content="The table behind the explainer&#x27;s chart of the four national payers&#x27; Medicare Advantage medical loss ratios, 2014 to 2023, the posting dates of CMS&#x27;s ten MLR public use files, and the method.">
+<meta property="og:title" content="Data and methods: CMS Medicare Advantage MLR, four payers, 2014 to 2023">
+<meta property="og:description" content="The table behind the explainer&#x27;s chart of the four national payers&#x27; Medicare Advantage medical loss ratios, 2014 to 2023, the posting dates of CMS&#x27;s ten MLR public use files, and the method.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://hedgequantresearch.com/data/">
+<link rel="canonical" href="https://hedgequantresearch.com/data/">
+<link rel="icon" href="data:,">
+<link rel="stylesheet" href="../style.css">
+</head>
+<body>
+<div class="page">
+<header>
+  <h1><a class="home" href="../">Hedge Quantitative Research</a></h1>
+  <p class="subtitle">Jiho Lee. Massachusetts.</p>
+</header>
+<main>
+  <div class="text doc">
+    <h2 class="page-title">Data and methods: CMS Medicare Advantage MLR, four payers, 2014 to 2023</h2>
+    <p>The data and method behind the chart in the explainer <i>How to use the CMS Medicare Advantage MLR public use files</i>, built on 4 November 2026 from CMS's public files and nothing else.</p>
+
+    <section>
+      <h3>Files</h3>
+      <ul class="files">
+        <li><a href="ma_mlr_four_payers_2014_2023.csv">ma_mlr_four_payers_2014_2023.csv</a> (CSV, 7,264 bytes): the table behind the chart, one row per payer and contract year, 40 rows.</li>
+        <li><a href="README_ma_mlr_four_payers.txt">README_ma_mlr_four_payers.txt</a> (text, 13,313 bytes): the table's method, one line per column, and the CMS source files with their URLs and sha256 hashes.</li>
+        <li><a href="puf_release_dates.csv">puf_release_dates.csv</a> (CSV, 6,553 bytes): when CMS posted each of its ten MLR public use files, with the archived captures that bound each date.</li>
+      </ul>
+      <p>Data: <a href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a>, Hedge Quantitative Research LLC. Underlying CMS files are United States government works.</p>
+    </section>
+
+    <section>
+      <h3>The table and the chart</h3>
+      <p>CMS publishes contract dollars for 2014 to 2017 and for 2023. For those years each payer's ratio is (claims plus quality improvement) divided by (revenue minus taxes and fees), summed over the payer's contracts. For 2018 to 2022 the public files carry only CMS's adjusted MLR, a different measure, so those years form a separate series and are not joined to the dollar years.</p>
+      <p>For 2018 to 2022 CMS publishes no dollars, only each contract's credibility-adjusted MLR, so each payer's figure for those years is an average of its contracts' ratios, weighted by each contract's December enrollment as CMS's Monthly Enrollment by Contract file prints it. That file gives one total per contract. The county-level enrollment file does not: it blanks every county cell of 10 or fewer enrollees and lists every county in a plan's service area, so most blanked cells are empty. Measured against the contract totals, a blanked cell holds fewer than 0.2 enrollees on average for three of the four payers and 0.5 to 1.1 for the fourth, and the blanked cells together hold between 0.6 and 1.6 percent of a payer's enrollment. Treating them as zero gives the same series to within 0.15 points; treating each as 5 moves one payer by up to 2.8 points.</p>
+      <p><b>Exclusions.</b> Standalone Part D contracts (contract numbers beginning S or E whose plans are all prescription drug plans) are netted out of every payer. Cost contracts are netted by the organization type the year's December file gives them, because their rows in the MLR file carry the contract's Part D offering only. CMS itself leaves non-credible contracts (MA under 2,400 member months, Part D under 4,800) and single-plan contracts out of the public files.</p>
+      <p><b>Attribution.</b> Each contract-year goes to a payer by the Parent Organization string in CMS's December enrollment file (Monthly Enrollment by Contract/Plan/State/County) of the same year. The string is lower-cased, stripped of punctuation and trailing corporate suffixes, and matched by six prefix rules anchored at its start, never by a loose substring: humana (Humana), unitedhealth group (UnitedHealth Group), cvs health and aetna (CVS Health), elevance health and anthem (Elevance Health). A string that matches Elevance Health or Anthem but also bundles independent Blue Cross Blue Shield plans goes to review and stays out of the Elevance series; one contract does so in each year. A contract missing from its own year's December takes its parent from the nearest other December that lists it, ties going to the earlier; five 2019 contract-years resolve this way, all from December 2018. No contract-year is assigned by hand: where a December string names a subsidiary rather than its listed parent, the table follows the string as CMS published it. CVS Health includes Aetna in every year, including before the November 2018 acquisition; Elevance Health includes Anthem.</p>
+      <p>The chart in the explainer is drawn from this table: <code>ratio_dollar_basis</code> for 2014 to 2017 and 2023, <code>ratio_enrollment_basis</code> for 2018 to 2022.</p>
+    </section>
+
+    <section>
+      <h3>Posting dates</h3>
+      <div class="table-wrap">
+      <table class="dates">
+        <thead><tr><th scope="col">Contract year</th><th scope="col">Posting window</th><th scope="col">Months after the year ended</th><th scope="col">Archive</th></tr></thead>
+        <tbody>
+        <tr><td>2014</td><td><span class="nw">2017-01-11</span> <span class="nw">to 2017-01-18</span></td><td><span class="nw">24.4</span> <span class="nw">to 24.6</span></td><td><a href="https://web.archive.org/web/20170118135849/https://www.cms.gov/Medicare/Medicare-Advantage/Plan-Payment/MedicalLossRatio.html">capture</a></td></tr>
+        <tr><td>2015</td><td><span class="nw">2021-09-24</span> <span class="nw">to 2021-10-02</span></td><td><span class="nw">68.8</span> <span class="nw">to 69.1</span></td><td><a href="https://web.archive.org/web/20211002033141/https://www.cms.gov/Medicare/Medicare-Advantage/Plan-Payment/MedicalLossRatio">capture</a></td></tr>
+        <tr><td>2016</td><td><span class="nw">2021-09-24</span> <span class="nw">to 2021-10-02</span></td><td><span class="nw">56.8</span> <span class="nw">to 57.0</span></td><td><a href="https://web.archive.org/web/20211002033141/https://www.cms.gov/Medicare/Medicare-Advantage/Plan-Payment/MedicalLossRatio">capture</a></td></tr>
+        <tr><td>2017</td><td><span class="nw">2021-09-24</span> <span class="nw">to 2021-10-02</span></td><td><span class="nw">44.8</span> <span class="nw">to 45.0</span></td><td><a href="https://web.archive.org/web/20211002033141/https://www.cms.gov/Medicare/Medicare-Advantage/Plan-Payment/MedicalLossRatio">capture</a></td></tr>
+        <tr><td>2018</td><td><span class="nw">2021-09-24</span> <span class="nw">to 2021-10-02</span></td><td><span class="nw">32.8</span> <span class="nw">to 33.1</span></td><td><a href="https://web.archive.org/web/20211002033141/https://www.cms.gov/Medicare/Medicare-Advantage/Plan-Payment/MedicalLossRatio">capture</a></td></tr>
+        <tr><td>2019</td><td><span class="nw">2021-09-24</span> <span class="nw">to 2021-10-02</span></td><td><span class="nw">20.8</span> <span class="nw">to 21.1</span></td><td><a href="https://web.archive.org/web/20211002033141/https://www.cms.gov/Medicare/Medicare-Advantage/Plan-Payment/MedicalLossRatio">capture</a></td></tr>
+        <tr><td>2020</td><td><span class="nw">2023-02-05</span> <span class="nw">to 2023-06-09</span></td><td><span class="nw">25.2</span> <span class="nw">to 29.2</span></td><td><a href="https://web.archive.org/web/20230609023541/https://www.cms.gov/Medicare/Medicare-Advantage/Plan-Payment/MedicalLossRatio">capture</a></td></tr>
+        <tr><td>2021</td><td><span class="nw">2024-09-26</span> <span class="nw">to 2024-11-04</span></td><td><span class="nw">32.9</span> <span class="nw">to 34.1</span></td><td><a href="https://web.archive.org/web/20241104221401/https://www.cms.gov/medicare/health-drug-plans/medical-loss-ratio">capture</a></td></tr>
+        <tr><td>2022</td><td><span class="nw">2025-01-13</span> <span class="nw">to 2025-01-26</span></td><td><span class="nw">24.4</span> <span class="nw">to 24.9</span></td><td><a href="https://web.archive.org/web/20250126101055/https://www.cms.gov/medicare/health-drug-plans/medical-loss-ratio">capture</a></td></tr>
+        <tr><td>2023</td><td><span class="nw">2026-02-08</span> <span class="nw">to 2026-03-02</span></td><td><span class="nw">25.3</span> <span class="nw">to 26.0</span></td><td><a href="https://web.archive.org/web/20260302013510/https://www.cms.gov/medicare/health-drug-plans/medical-loss-ratio">capture</a></td></tr>
+        </tbody>
+      </table>
+      </div>
+      <p>As of 4 November 2026 CMS had not posted the CY2024 file. The file named <code>mlr-public-use-file-2024.zip</code> on cms.gov is the commercial-market MLR public use file, a separate product.</p>
+      <p>CMS replaced the CY2019, CY2020 and CY2023 files after first posting them, and the first versions are not archived intact: the earliest archived CY2019 and CY2020 copies date from October 2023, and the first CY2023 file was never archived.</p>
+      <p>Each window runs from the last archived capture of CMS's MLR page that lacks the year's file to the first capture that lists it, so the capture with the file bounds the posting date from above. The CSV also carries each file's Last-Modified header from the CMS server, which dates the file now on the server: for the three replaced files that is the replacement, not the first posting.</p>
+    </section>
+
+    <section>
+      <h3>Sensitivities</h3>
+      <p>Three contracts in the public record carry a December string that names the subsidiary rather than its SEC-listed parent: HealthSun in 2017 (Elevance Health), Independent Care Health Plan in 2016 to 2020 (Humana) and the Allina Health and Aetna plan in 2023 (CVS Health). Moving these seven contract-years to the listed parent moves the four series by at most 0.06 points in any year; the largest move lowers Elevance Health's 2017 ratio by 0.06 points. Two values printed to one decimal change: Elevance Health 2017 from 87.9% to 87.8%, and CVS Health 2023 from 88.8% to 88.7%.</p>
+      <p>The contracts CMS leaves out of the files are 21 to 28 percent of the MA and MA-PD contracts in each December but hold only 1.5 to 3.7 percent of MA and MA-PD December enrollment, and 0.0 to 6.6 percent of the four payers' own. Contracts offering a single plan hold 77 to 95 percent of the enrollment left out. UnitedHealth Group is the high end, because several of its single-plan contracts run to tens of thousands of members; for Humana the share never reaches 1 percent.</p>
+      <p>Netting cost contracts by their December organization type removes 45 contract-years over the ten years; one of them sat inside a payer series (UnitedHealth Group 2017), and taking it out moves that year by 0.0003 points.</p>
+    </section>
+
+    <section>
+      <p>Corrections to jiho@hedgequantresearch.com</p>
+    </section>
+  </div>
+</main>
+<footer>
+  <p>Hedge Quantitative Research LLC, Massachusetts.</p>
+</footer>
+</div>
+</body>
+</html>
