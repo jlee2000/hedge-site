@@ -191,3 +191,6 @@ newsletter capture, no social icons beyond the one LinkedIn text link, no images
 - 2026-11-05 14:00: home page Writing line links the post (https://0xjiho.substack.com/p/how-to-use-the-cms-medicare-advantage)
   in the linked form the work order of 2026-11-04 wrote, keeping the `/data/` link (commit "home: Writing line links the
   post"). Not pushed: J reviews and pushes.
+- 2026-11-05 16:50: home page Recent engagement line drops the study purpose; the sentence now ends at "for a
+  national value-based care company." and nothing else on the page changed (commit "home: Recent engagement line
+  drops the study purpose"). Not pushed: J reviews and pushes.
