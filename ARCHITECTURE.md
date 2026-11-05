@@ -194,3 +194,6 @@ newsletter capture, no social icons beyond the one LinkedIn text link, no images
 - 2026-11-05 16:50: home page Recent engagement line drops the study purpose; the sentence now ends at "for a
   national value-based care company." and nothing else on the page changed (commit "home: Recent engagement line
   drops the study purpose"). Not pushed: J reviews and pushes.
+- 2026-11-05 17:05: home page Writing line adds part two: after the title link, "in two parts" with links to part
+  one and to part two (https://0xjiho.substack.com/p/how-to-use-the-cms-medicare-advantage-b31), keeping the `/data/`
+  link (commit "home: Writing line adds part two"). Not pushed: J reviews and pushes.
