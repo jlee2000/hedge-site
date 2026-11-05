@@ -188,3 +188,6 @@ newsletter capture, no social icons beyond the one LinkedIn text link, no images
 - 2026-11-04 19:45: home page Writing line in the Public section, after the CFTC link, with the `/data/` link only
   (no Substack URL yet; J adds the post's link in a one-line commit when it exists) (commit "home: Writing line with
   the /data/ link"). Not pushed.
+- 2026-11-05 14:00: home page Writing line links the post (https://0xjiho.substack.com/p/how-to-use-the-cms-medicare-advantage)
+  in the linked form the work order of 2026-11-04 wrote, keeping the `/data/` link (commit "home: Writing line links the
+  post"). Not pushed: J reviews and pushes.
