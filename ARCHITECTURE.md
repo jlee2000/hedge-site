@@ -11,7 +11,7 @@ order "hedgequantresearch.com v0".
 
 | File | Role |
 | --- | --- |
-| `index.html` | The page. Every word of visible text comes from the copy file `SITE_COPY_v0.md` kept outside this repository, except the "Writing" line in the Public section, which comes from the work order of 2026-11-04; this repository does not edit copy. |
+| `index.html` | The page. Every word of visible text comes from the copy file `SITE_COPY_v0.md` kept outside this repository, except the "Writing" line in the Public section, which comes from the work orders of 2026-11-04 and 2026-11-09; this repository does not edit copy. |
 | `thanks.html` | The one-line page the contact form redirects to after a successful submission. `noindex`. |
 | `style.css` | The only stylesheet, shared by every page. System serif stack (Georgia), one accent colour for links and the button, hairline rules. The data page's rules (headings, file list, posting-dates table) sit in their own block and use selectors the home page does not carry, so the home page renders unchanged. |
 | `data/index.html` | The data and methods page at `/data/`. Its text comes from the work order of 2026-11-04 and the public reports it names, not from the copy file. |
@@ -197,3 +197,10 @@ newsletter capture, no social icons beyond the one LinkedIn text link, no images
 - 2026-11-05 17:05: home page Writing line adds part two: after the title link, "in two parts" with links to part
   one and to part two (https://0xjiho.substack.com/p/how-to-use-the-cms-medicare-advantage-b31), keeping the `/data/`
   link (commit "home: Writing line adds part two"). Not pushed: J reviews and pushes.
+- 2026-11-09 20:47: home page Writing line adds the CFTC essay: the paragraph now opens with a link to "Who carries
+  the GPU rental rate" (https://0xjiho.substack.com/p/who-carries-the-gpu-rental-rate), then ", an essay from that
+  comment; and " (the comment is the CFTC link in the line above), then the MLR explainer's title link, "in two
+  parts", the part links and the `/data/` link exactly as they stood (commit "home: Writing line adds the CFTC
+  essay"). The fence grep is zero on the added bytes; the one statutory-dataset name on the page is the existing
+  Recent engagement copy. Review renders in `_review/round-7/` (`home-desktop.png`, 1280x1000, and
+  `home-mobile-full.png`, 390 px wide through `_review/frame-mobile-full.html`). J ordered the push with the run.
